@@ -1,64 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='ko'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-        integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <script src="js/main.js"></script>
-    <script src="js/data.js"></script>
-    <title>Calendar</title>
+    <meta charset='utf-8' />
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+
+    <style>
+        /* 달력 글씨 크기 및 스타일 살짝 조정 */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Malgun Gothic', sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 캘린더 헤더 폰트 크기 */
+        .fc-toolbar-title {
+            font-size: 20px !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // 월별 보기
+                locale: 'ko', // 한국어 설정
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,listMonth'
+                },
+                events: [ // 예시 데이터 (나중에 DB랑 연결 가능)
+                    {
+                        title: '학원 수업',
+                        start: '2025-01-09'
+                    },
+                    {
+                        title: '프로젝트 회의',
+                        start: '2025-01-15',
+                        color: 'red' // 색상 변경 가능
+                    }
+                ]
+            });
+            calendar.render();
+        });
+    </script>
 </head>
 
 <body>
-    <header>
-        <h1>
-            <i class="far fa-calendar-check"></i>
-            <span>캘린더</span>
-        </h1>
-        <div class="calendar_title">
-            <button class="prev">&#60;</button>
-            <span class="current-year-month"></span>
-            <button class="next">&#62;</button>
-        </div>
-    </header>
-    <section class="content-left">
-        <div class="left-main">
-            <div class="main-wrap">
-                <div class="main-day"></div>
-                <div class="main-date"></div>
-            </div>
-            <div class="todo-wrap">
-                <div class="todo-title">Todo List</div>
-                <form class="input-form">
-                    <input type="text" placeholder="write here!!" class="input-box" />
-                    <button type="submit" class="input-btn clickBtn">INPUT</button>
-                </form>
-                <ul class="todoList"></ul>
-                <div class="showList">
-                    <span class="listText"></span>
-                    <span class="createDate"></span>
-                    <button class="closed">close</button>
-                </div>
-                <div class="bgblack"></div>
-            </div>
-        </div>
-    </section>
-    <section class="content-right">
-        <div class="day-of-week">
-            <div class="dayHeader sun">Sun</div>
-            <div class="dayHeader">Mon</div>
-            <div class="dayHeader">Tue</div>
-            <div class="dayHeader">Wed</div>
-            <div class="dayHeader">Thu</div>
-            <div class="dayHeader">Fri</div>
-            <div class="dayHeader sat">Sat</div>
-        </div>
-        <div class="calendar-body"></div>
-    </section>
+    <div id='calendar'></div>
 </body>
 
 </html>
